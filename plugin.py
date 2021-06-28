@@ -3,7 +3,7 @@
 # Author: Breizhcat
 #
 """
-<plugin key="NissanLeaf" name="Domoticz Nissan Leaf" author="breizhcat" version="1.0" wikilink="http://www.domoticz.com/wiki/plugins/plugin.html" externallink="https://github.com/BreizhCat/DomoticzNissanLeaf">
+<plugin key="NissanLeaf" name="Domoticz Nissan Leaf" author="breizhcat" version="1.0.1" wikilink="http://www.domoticz.com/wiki/plugins/plugin.html" externallink="https://github.com/BreizhCat/DomoticzNissanLeaf">
     <description>
 		<h2>Nissan Leaf</h2><br/>
 		<h3>Features</h3>
@@ -11,7 +11,7 @@
 			<li>Battery Level</li>
 			<li>Charging Status</li>
             <li>Range autonomy (with / without AC)</li>
-            <li>Information about distance drived</li>
+            <li>Information about distance driven</li>
 		</ul>
         <p>VIN not yet used</p>
     </description>
@@ -203,7 +203,7 @@ class BasePlugin:
             Domoticz.Device(Unit=DEVICE_UPDATE, Name="Refresh Data", Type=244, Subtype=62, Switchtype=9, Used=1).Create()
 
         if DEVICE_ODOMETER not in Devices:
-            Domoticz.Device(Name= 'Drived', Unit=DEVICE_ODOMETER, Type=243, Subtype=33, Switchtype=3,
+            Domoticz.Device(Name= 'Driven', Unit=DEVICE_ODOMETER, Type=243, Subtype=33, Switchtype=3,
                             Options={'AddjValue2': 1000, 'ValueQuantity': 'Kilometers', 'ValueUnits': 'Km', 'AddDBLogEntry' : 'true', 'DisableLogAutoUpdate' : 'true'},                                                                           
                             Image=Images[IMAGE_CAR].ID, Description='Distance driven', Used=1).Create()            
 
