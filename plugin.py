@@ -3,7 +3,7 @@
 # Author: Breizhcat
 #
 """
-<plugin key="NissanLeaf" name="Domoticz Nissan Leaf" author="breizhcat" version="1.0" wikilink="http://www.domoticz.com/wiki/plugins/plugin.html" externallink="https://github.com/BreizhCat/DomoticzNissanLeaf">
+<plugin key="NissanLeaf" name="Domoticz Nissan Leaf" author="breizhcat" version="1.0.3" wikilink="http://www.domoticz.com/wiki/plugins/plugin.html" externallink="https://github.com/BreizhCat/DomoticzNissanLeaf">
     <description>
 		<h2>Nissan Leaf</h2><br/>
 		<h3>Features</h3>
@@ -13,7 +13,6 @@
             <li>Range autonomy (with / without AC)</li>
             <li>Information about distance drived</li>
 		</ul>
-        <p>VIN not yet used</p>
     </description>
     <params>
         <param field="Username" label="Nissan Account"  width="150px"  required="true" />
@@ -167,13 +166,8 @@ class BasePlugin:
         _time = datetime.now()
 
         if _time.minute in [0, 15, 30, 45]:
-            Domoticz.Log("onHeartbeat executed")
+            Domoticz.Log("Mise à jour des devices")
             self._updateDevices()
-    
-
-        if _time.hour == 2 and _time == 0:
-            Domoticz.Log("onHeartbeat executed")
-            self._updateOdometer()
 
     def _create_icons(self):
         if IMAGE_CAR not in Images:
@@ -211,11 +205,7 @@ class BasePlugin:
         thread = threading.Thread(name="UpdateLeafInformations", target=BasePlugin._connect_and_update, args=(self,))
         thread.start()
 
-    def _updateOdometer(self):
-        thread = threading.Thread(name="UpdateLeafInformations", target=BasePlugin._connect_and_update, args=(self,))
-        thread.start() 
-
-    def _connect_and_update(self, mode = True):
+    def _connect_and_update(self):
         try:
             Domoticz.Log("Thread lancé - Tentative de connexion")
             leaf = Leaf(Parameters["Username"], Parameters["Password"], region_code=Parameters["Mode5"])
@@ -250,26 +240,25 @@ class BasePlugin:
                 
                 Domoticz.Log("Charging State = {}".format(status))
 
-                if mode:
-                    distance = leaf.PriceSimulatorDetailInfoRequest()
-                    today = False
-                    for i in distance['PriceSimulatorDetailInfoResponsePersonalData']['PriceSimulatorDetailInfoDateList']['PriceSimulatorDetailInfoDate']:
-                        km = 0
-                        for j in i['PriceSimulatorDetailInfoTripList']['PriceSimulatorDetailInfoTrip']:
-                            km += int(j['TravelDistance'])
-                        
-                        nValue = 0
-                        kmsValue = float("{:.2f}".format(km))
-                        sValue = str(kmsValue) + ';' + str(kmsValue) + ';' + i['TargetDate']
-                        Devices[DEVICE_ODOMETER].Update(nValue = nValue, sValue = sValue) 
+                distance = leaf.PriceSimulatorDetailInfoRequest()
+                today = False
+                for i in distance['PriceSimulatorDetailInfoResponsePersonalData']['PriceSimulatorDetailInfoDateList']['PriceSimulatorDetailInfoDate']:
+                    km = 0
+                    for j in i['PriceSimulatorDetailInfoTripList']['PriceSimulatorDetailInfoTrip']:
+                        km += int(j['TravelDistance'])
+                    
+                    nValue = 0
+                    kmsValue = float("{:.2f}".format(km))
+                    sValue = str(kmsValue) + ';' + str(kmsValue) + ';' + i['TargetDate']
+                    Devices[DEVICE_ODOMETER].Update(nValue = nValue, sValue = sValue) 
 
-                        if i['TargetDate'] == datetime.now().strftime('%Y-%m-%d'):
-                            today = True
-                            sValue = str(kmsValue) + ';' + str(kmsValue)
-                            Devices[DEVICE_ODOMETER].Update(nValue = nValue, sValue = sValue)  
+                    if i['TargetDate'] == datetime.now().strftime('%Y-%m-%d'):
+                        today = True
+                        sValue = str(kmsValue) + ';' + str(kmsValue)
+                        Devices[DEVICE_ODOMETER].Update(nValue = nValue, sValue = sValue)  
 
-                    if not today:
-                        Devices[DEVICE_ODOMETER].Update(nValue = 0, sValue = "0;0") 
+                if not today:
+                    Devices[DEVICE_ODOMETER].Update(nValue = 0, sValue = "0;0") 
 
                 Domoticz.Log("onHeartbeat Connexion ok")
             else:
