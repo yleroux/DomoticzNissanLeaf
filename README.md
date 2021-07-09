@@ -42,6 +42,7 @@ Une fois l'hardware créé un ensemble de 6 devices sera ajouté à votre Domoti
 
 :warning: Je n'ai pas trouvé comment mettre le ratio à 1000 pour le device Driven. 
 Il faut donc l'éditer et mettre 1000 dans la zone `Counter Divider`.
+
 ![Divider](assets/divider.jpg)
 ## Chargement historique
 
