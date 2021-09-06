@@ -23,9 +23,9 @@ for i in data['PriceSimulatorDetailInfoResponsePersonalData']['PriceSimulatorDet
             print("---> TRIP" + j['GpsDatetime'])
 
     url_arguements = "&nvalue=0&svalue=" + str(km) + ";" + str(km) + ";" + i['TargetDate']
-    #result = requests.get(url_to_request + url_arguements)
-    #print(i['TargetDate']+" : " + str(km) + " m [Server Code: " + str(result.status_code) + "]")
+    result = requests.get(url_to_request + url_arguements)
+    print(i['TargetDate']+" : " + str(km) + " m [Server Code: " + str(result.status_code) + "]")
     print(i['TargetDate']+" : " + str(km) + " m ")
 
 
-    #time.sleep(2)
+    time.sleep(1)
