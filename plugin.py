@@ -35,7 +35,7 @@
     </params>
 </plugin>
 """
-BASE_URL = 'https://gdcportalgw.its-mo.com/api_v190426_NE/gdc/'
+BASE_URL = 'https://gdcportalgw.its-mo.com/api_v200413_NE/gdc/'
 
 IMAGE_CAR     = 'NissanLeafCar'
 IMAGE_BATTERY = 'NissanLeafBattery'
@@ -165,7 +165,7 @@ class BasePlugin:
     def onHeartbeat(self):
         _time = datetime.now()
 
-        if _time.minute in [0, 15, 30, 45]:
+        if _time.minute in [0]:
             Domoticz.Log("Mise à jour des devices")
             self._updateDevices()
 
