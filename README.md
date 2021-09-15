@@ -40,6 +40,10 @@ Une fois l'hardware créé un ensemble de 6 devices sera ajouté à votre Domoti
 
 ![Les devices](assets/devices.png)
 
+:warning: Je n'ai pas trouvé comment mettre le ratio à 1000 pour le device Driven. 
+Il faut donc l'éditer et mettre 1000 dans la zone `Counter Divider`.
+
+![Divider](assets/divider.jpg)
 ## Chargement historique
 
 Si comme moi, vous avez déjà récupéré un historique des déplacements en utilisant le package Leafpy, vous avez peut être un historique à charger une fois le module installé dans Domoticz.

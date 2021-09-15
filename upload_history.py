@@ -28,4 +28,4 @@ for i in data['PriceSimulatorDetailInfoResponsePersonalData']['PriceSimulatorDet
     print(i['TargetDate']+" : " + str(km) + " m ")
 
 
-    #time.sleep(2)
+    time.sleep(1)
