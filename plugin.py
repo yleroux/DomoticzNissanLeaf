@@ -35,7 +35,7 @@
     </params>
 </plugin>
 """
-BASE_URL = 'https://gdcportalgw.its-mo.com/api_v200413_NE/gdc/'
+BASE_URL = 'https://gdcportalgw.its-mo.com/api_v210707_NE/gdc/'
 
 IMAGE_CAR     = 'NissanLeafCar'
 IMAGE_BATTERY = 'NissanLeafBattery'
