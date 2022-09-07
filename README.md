@@ -1,6 +1,6 @@
 # Domoticz Nissan Leaf Informations
 
-[![Generic badge](https://img.shields.io/badge/Version-1.0.3-GREEN.svg) ![Generic badge](https://img.shields.io/badge/Domoticz-2021.1%2013314-369.svg)](https://domoticz.com) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Generic badge](https://img.shields.io/badge/Version-1.0.5-GREEN.svg) ![Generic badge](https://img.shields.io/badge/Domoticz-2021.1%2013314-369.svg)](https://domoticz.com) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 Ce module permet de suivre l'état de la voiture (chargement, batterie et autonomie) et de voir les distances parcourues chaque jour.
 
@@ -37,6 +37,7 @@ Une fois l'hardware créé un ensemble de 6 devices sera ajouté à votre Domoti
 1. Le nombre de kilomètre parcourus
 1. L'état de charge (branché ou non)
 1. Un switch pour forcer la mise à jour des données
+1. Température de l'habitacle
 
 ![Les devices](assets/devices.png)
 
