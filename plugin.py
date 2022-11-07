@@ -295,14 +295,14 @@ class BasePlugin:
                 Used=1,
             ).Create()
 
-        if DEVICE_CABIN_TEMP not in Devices:
-            Domoticz.Device(
-                Unit=DEVICE_CABIN_TEMP,
-                Name="Cabin Temp",
-                Type=80,
-                Subtype=5,
-                Used=1,
-            ).Create()
+#         if DEVICE_CABIN_TEMP not in Devices:
+#             Domoticz.Device(
+#                 Unit=DEVICE_CABIN_TEMP,
+#                 Name="Cabin Temp",
+#                 Type=80,
+#                 Subtype=5,
+#                 Used=1,
+#             ).Create()
 
     def _updateDevices(self):
         thread = threading.Thread(
@@ -407,17 +407,17 @@ class BasePlugin:
                     Devices[DEVICE_ODOMETER].Update(nValue=0, sValue="0;0")
 
 
-                Domoticz.Log("Retrieve Cabin Temp")
-                result = leaf.GetInteriorTemperatureRequestForNsp()
-                while True:
-                    temp = leaf.GetInteriorTemperatureResultForNsp(resultKey=result['resultKey'])
+#                 Domoticz.Log("Retrieve Cabin Temp")
+#                 result = leaf.GetInteriorTemperatureRequestForNsp()
+#                 while True:
+#                     temp = leaf.GetInteriorTemperatureResultForNsp(resultKey=result['resultKey'])
 
-                    if temp['responseFlag'] == '0':
-                        time.sleep(30)
-                    else:
-                        Domoticz.Log(f"Cabin Temp ={temp['Inc_temp']}°c")
-                        Devices[DEVICE_CABIN_TEMP].Update(nValue=0, sValue=f"{temp['Inc_temp']}")
-                        break
+#                     if temp['responseFlag'] == '0':
+#                         time.sleep(30)
+#                     else:
+#                         Domoticz.Log(f"Cabin Temp ={temp['Inc_temp']}°c")
+#                         Devices[DEVICE_CABIN_TEMP].Update(nValue=0, sValue=f"{temp['Inc_temp']}")
+#                         break
             else:
                 Domoticz.Log("onHeartbeat Connection ko")
         except Exception as err:
